@@ -12,7 +12,7 @@ vim.opt.rtp:prepend(lazypath)
 
 local include =
 {
-    'tpope/vim-sleuth',
+    { 'tpope/vim-sleuth', enabled = false },
     'lewis6991/gitsigns.nvim',
     'folke/which-key.nvim',
     'nvim-telescope/telescope.nvim',
@@ -21,13 +21,13 @@ local include =
     'neovim/nvim-lspconfig',
     'stevearc/conform.nvim',
     'hrsh7th/nvim-cmp',
-    'folke/tokyonight.nvim',
+    { 'folke/tokyonight.nvim', enabled = false },
     'folke/todo-comments.nvim',
     'nvim-treesitter/nvim-treesitter',
     'echasnovski/mini.nvim',
 }
 
-local log_file = vim.fn.stdpath( 'data' ) .. '/lazy_errors.log'
+local log_file = vim.fn.stdpath 'data' .. '/lazy_errors.log'
 local err_count = 0
 
 -- Function to log errors --
@@ -65,12 +65,17 @@ end
 
 -- Parse Include plugins looking for config --
 local plugins = {}
-for i, plugin in ipairs( include ) do
-  local config = srequire( plugin )
-  plugins[i] = { plugin }
+for i, plugin in ipairs(include) do
+  if type(plugin) == 'string' then
+    plugins[i] = { plugin }
+  elseif type(plugin) == 'table' then
+    plugins[i] = plugin
+  end
+
+  local config = srequire(plugins[i][1])
 
   if config ~= nil then
-    plugins[i] = vim.tbl_extend( 'force', plugins[i], config )
+    plugins[i] = vim.tbl_extend('force', plugins[i], config)
   end
 end
 
@@ -84,8 +89,7 @@ end
 --  To update plugins you can run
 --    :Lazy update
 --
-require('lazy').setup( plugins,
-{
+require('lazy').setup(plugins, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
     -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
@@ -106,3 +110,15 @@ require('lazy').setup( plugins,
     },
   },
 })
+
+-- After lazy completes, notify of errors if any --
+if err_count > 0 then
+    vim.api.nvim_echo(
+    {
+         {
+             'Failed to load ' .. err_count .. ' plugins.' ..
+             'See ' .. log_file .. ' for details.\n',
+             'ErrorMsg'
+         }
+    }, true, {} )
+end
