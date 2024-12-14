@@ -1,6 +1,15 @@
+--=============================================================================.
+--== $Module: settings.lua                                                     $
+--== -------------------------------------------------------------------------
+--== Main settings file for this neovim environment.
+--==
+--== $  Author: Wesley DeMarco                                                 $
+--== $ Project: Neovim Configuration                                           $
+--== $    Date: 2024-12-14 22:54:00                                            $
+--== $Revision: r0                                                             $
+--==...........................................................................=
 -- Set <space> as the leader key
 -- See `:help mapleader`
---  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -20,9 +29,7 @@ vim.opt.showmode = false
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.schedule(function()
-	vim.opt.clipboard = "unnamedplus"
-end)
+vim.opt.clipboard = "unnamedplus"
 
 -- Enable break indent
 vim.opt.breakindent = true
@@ -52,10 +59,16 @@ vim.opt.splitbelow = true
 --  See `:help 'list'`
 --  and `:help 'listchars'`
 vim.opt.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
-
--- Preview substitutions live, as you type!
-vim.opt.inccommand = "split"
+vim.opt.listchars =
+{
+    tab      = "⭲ ",
+    eol      = "⤶",
+    precedes = "❰",
+    extends  = "❱",
+    trail    = "·",
+    space    = "·",
+    nbsp     = "·",
+}
 
 -- Show which line your cursor is on
 vim.opt.cursorline = true

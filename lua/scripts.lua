@@ -1,1 +1,12 @@
+--=============================================================================.
+--== $Module: scripts.lua                                                      $
+--== -------------------------------------------------------------------------
+--== Module to load any small scripts to use in this neovim environment.
+--==
+--== $  Author: Wesley DeMarco                                                 $
+--== $ Project: Neovim Configuration                                           $
+--== $    Date: 2024-12-14 22:54:00                                            $
+--== $Revision: r0                                                             $
+--==...........................................................................=
+-- Script to briefly flash highlight on yanked text --
 require( 'scripts.flashyank' )

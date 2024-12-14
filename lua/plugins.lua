@@ -1,66 +1,136 @@
--- [[ Install `lazy.nvim` plugin manager ]]
---    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
-  local out = vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
-  if vim.v.shell_error ~= 0 then
-    error('Error cloning lazy.nvim:\n' .. out)
-  end
-end ---@diagnostic disable-next-line: undefined-field
-vim.opt.rtp:prepend(lazypath)
+--=============================================================================.
+--== $Module: plugins.lua                                                      $
+--== -------------------------------------------------------------------------
+--== Script containing references for each plugin to be loaded for this neovim
+--== environment and functions to assist LazyVim plugin manager in loading the
+--== plugins and invoking any plugin specific configuration files should they
+--== exist.
+--==
+--== $  Author: Wesley DeMarco                                                 $
+--== $ Project: Neovim Configuration                                           $
+--== $    Date: 2024-12-14 22:54:00                                            $
+--== $Revision: r0                                                             $
+--==...........................................................................=
+--=============================================================================.
+--==                     Install LazyVim Package Manager
+--==...........................................................................=
+-- See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
+-- Establish the path where LazyVim should reside --
+local lazypath = vim.fn.stdpath( 'data' ) .. '/lazy/lazy.nvim'
 
+-- If LazyVim is not already installed, install it --
+if not ( vim.uv or vim.loop ).fs_stat(lazypath) then
+
+    -- LazyVim github repo url --
+    local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
+
+    -- Build git command to pull LazyVim --
+    local out = vim.fn.system
+    {
+        'git',
+        'clone',
+        '--filter=blob:none',
+        '--branch=stable',
+        lazyrepo,
+        lazypath
+    }
+
+    -- If LazyVim failed to clone from github, Display an error --
+    if vim.v.shell_error ~= 0 then
+        error( 'Error cloning lazy.nvim:\n' .. out )
+    end
+end
+
+-- Give vim the path to the package manager --
+---@diagnostic disable-next-line: undefined-field
+vim.opt.rtp:prepend( lazypath )
+
+--=============================================================================.
+--==                          List Plugins to Include
+--==...........................................................................=
 local include =
 {
-    { 'tpope/vim-sleuth', enabled = false },
     'lewis6991/gitsigns.nvim',
     'folke/which-key.nvim',
     'nvim-telescope/telescope.nvim',
     'folke/lazydev.nvim',
     'Bilal2453/luvit-meta',
     'neovim/nvim-lspconfig',
-    'stevearc/conform.nvim',
     'hrsh7th/nvim-cmp',
-    { 'folke/tokyonight.nvim', enabled = false },
     'folke/todo-comments.nvim',
     'nvim-treesitter/nvim-treesitter',
     'echasnovski/mini.nvim',
 }
 
-local log_file = vim.fn.stdpath 'data' .. '/lazy_errors.log'
+-- Define logfile for any errors that may occur when installing plugins --
+local log_file = vim.fn.stdpath( 'data' ) .. '/lazy_errors.log'
+
+-- Count errors that may show up so we can display the count later --
 local err_count = 0
 
--- Function to log errors --
+--=============================================================================.
+--== log_errors
+--== -------------------------------------------------------------------------
+--== Function to log errors to the file defined above.
+--==
+--== Input:
+--==    string message    | Error message to write to the log file
+--==
+--== Output:
+--==    N / A
+--==...........................................................................=
 local function log_error(message)
-  local file = io.open(log_file, 'a')
+    -- Open the log file for appending --
+    local file = io.open(log_file, 'a')
 
-  if file then
-    local date_str = '[' .. os.date '%Y-%m-%d %H:%M:%S' .. '] '
-    file:write(date_str .. message .. '\n')
-    file:close()
-  end
+    -- If the file succesfully opened, write the error --
+    if file then
+        -- Include the date and time --
+        local date_str = '[' .. os.date '%Y-%m-%d %H:%M:%S' .. '] '
+
+        -- Write the message string --
+        file:write( date_str .. message .. '\n' )
+
+        -- Close the file --
+        file:close()
+    end
 end
 
--- Function to safely require a plugin and load its config if present --
-local function srequire(module)
-  -- Get config module path --
-  local config = 'plugins.' .. module:match('.*/(.*)'):gsub('%.(.*)$', ''):gsub('%.', '_')
-  local success, result = pcall(require, config)
+--=============================================================================.
+--== srequire
+--== -------------------------------------------------------------------------
+--== Function to safely require a plugin and load its config file if and only
+--== if it is present. The config file is not required so we want to gracefully
+--== load the plugin successfully if the config file is not found.
+--==
+--== Input:
+--==    string module     | Locator / Path of the module to load
+--==
+--== Output:
+--==    table             | Contents of the configuration loaded
+--==...........................................................................=
+local function srequire( module )
+    -- Get config module path --
+    local config = 'plugins.' .. module:match( '.*/(.*)' )
+                                       :gsub( '%.(.*)$', '' )
+                                       :gsub( '%.', '_' )
+    -- Call require on this config catching any error message --
+    local success, result = pcall( require, config )
 
-  -- Config was found and loaded successfully, return the config table --
-  if success then
-    return result
-  end
+    -- Config was found and loaded successfully, return the config table --
+    if success then
+      return result
+    end
 
-  -- If config was found but it has errors, log them --
-  local msg = ("module '%s' not found:"):format(config:gsub('-', '%%-'))
-  if not result:find(msg) then
-    log_error(result)
-    err_count = err_count + 1
-  end
+    -- If config was found but it has errors, log them --
+    local msg = ( "module '%s' not found:" ):format( config:gsub( '-', '%%-' ) )
+    if not result:find( msg ) then
+        log_error( result )
+        err_count = err_count + 1
+    end
 
-  -- If config was not found, return nil to indicate default configuration --
-  return nil
+    -- If config was not found, return nil to indicate default configuration --
+    return nil
 end
 
 -- Parse Include plugins looking for config --
@@ -79,35 +149,12 @@ for i, plugin in ipairs(include) do
   end
 end
 
--- [[ Configure and install plugins ]]
---
---  To check the current status of your plugins, run
---    :Lazy
---
---  You can press `?` in this menu for help. Use `:q` to close the window
---
---  To update plugins you can run
---    :Lazy update
---
-require('lazy').setup(plugins, {
+--=============================================================================.
+--==                         Call Lazy to load plugins
+--==...........................................................................=
+require( 'lazy' ).setup(plugins, {
   ui = {
-    -- If you are using a Nerd Font: set icons to an empty table which will use the
-    -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
-    icons = vim.g.have_nerd_font and {} or {
-      cmd = '⌘',
-      config = '🛠',
-      event = '📅',
-      ft = '📂',
-      init = '⚙',
-      keys = '🗝',
-      plugin = '🔌',
-      runtime = '💻',
-      require = '🌙',
-      source = '📄',
-      start = '🚀',
-      task = '📌',
-      lazy = '💤 ',
-    },
+    icons = {},
   },
 })
 
