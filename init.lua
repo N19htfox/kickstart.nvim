@@ -1,13 +1,13 @@
 --=============================================================================.
---== $Module: init.lua                                                         $
+--== init.lua
 --== -------------------------------------------------------------------------
 --== Main initialization script for the configuration of this neovim
 --== environment.
 --==
---== $  Author: Wesley DeMarco                                                 $
---== $ Project: Neovim Configuration                                           $
---== $    Date: 2024-12-14 22:54:00                                            $
---== $Revision: r0                                                             $
+--==  Project: Neovim Configuration
+--==   Author: Wesley DeMarco
+--==     Date: 2024-12-23
+--== Revision: 1
 --==...........................................................................=
 -- Load Settings --
 require( 'settings' )

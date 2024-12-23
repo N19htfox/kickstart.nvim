@@ -1,18 +1,13 @@
 --=============================================================================.
---== $Module: settings.lua                                                     $
+--== settings.lua
 --== -------------------------------------------------------------------------
 --== Main settings file for this neovim environment.
 --==
---== $  Author: Wesley DeMarco                                                 $
---== $ Project: Neovim Configuration                                           $
---== $    Date: 2024-12-14 22:54:00                                            $
---== $Revision: r0                                                             $
+--==  Project: Neovim Configuration
+--==   Author: Wesley DeMarco
+--==     Date: 2024-12-23
+--== Revision: 0
 --==...........................................................................=
--- Set <space> as the leader key
--- See `:help mapleader`
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = false
 

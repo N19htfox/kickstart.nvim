@@ -1,15 +1,15 @@
 --=============================================================================.
---== $Module: plugins.lua                                                      $
+--== plugins.lua
 --== -------------------------------------------------------------------------
 --== Script containing references for each plugin to be loaded for this neovim
 --== environment and functions to assist LazyVim plugin manager in loading the
 --== plugins and invoking any plugin specific configuration files should they
 --== exist.
 --==
---== $  Author: Wesley DeMarco                                                 $
---== $ Project: Neovim Configuration                                           $
---== $    Date: 2024-12-14 22:54:00                                            $
---== $Revision: r0                                                             $
+--==  Project: Neovim Configuration
+--==   Author: Wesley DeMarco
+--==     Date: 2024-12-23
+--== Revision: 1
 --==...........................................................................=
 --=============================================================================.
 --==                     Install LazyVim Package Manager
@@ -19,7 +19,7 @@
 local lazypath = vim.fn.stdpath( 'data' ) .. '/lazy/lazy.nvim'
 
 -- If LazyVim is not already installed, install it --
-if not ( vim.uv or vim.loop ).fs_stat(lazypath) then
+if not ( vim.uv or vim.loop ).fs_stat( lazypath ) then
 
     -- LazyVim github repo url --
     local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
@@ -79,9 +79,9 @@ local err_count = 0
 --== Output:
 --==    N / A
 --==...........................................................................=
-local function log_error(message)
+local function log_error( message )
     -- Open the log file for appending --
-    local file = io.open(log_file, 'a')
+    local file = io.open( log_file, 'a' )
 
     -- If the file succesfully opened, write the error --
     if file then
@@ -135,27 +135,29 @@ end
 
 -- Parse Include plugins looking for config --
 local plugins = {}
-for i, plugin in ipairs(include) do
-  if type(plugin) == 'string' then
-    plugins[i] = { plugin }
-  elseif type(plugin) == 'table' then
-    plugins[i] = plugin
-  end
+for i, plugin in ipairs( include ) do
+    if type( plugin ) == 'string' then
+        plugins[i] = { plugin }
+    elseif type( plugin ) == 'table' then
+        plugins[i] = plugin
+    end
 
-  local config = srequire(plugins[i][1])
+    local config = srequire( plugins[i][1] )
 
-  if config ~= nil then
-    plugins[i] = vim.tbl_extend('force', plugins[i], config)
-  end
+    if config ~= nil then
+        plugins[i] = vim.tbl_extend( 'force', plugins[i], config )
+    end
 end
 
 --=============================================================================.
 --==                         Call Lazy to load plugins
 --==...........................................................................=
-require( 'lazy' ).setup(plugins, {
-  ui = {
-    icons = {},
-  },
+require( 'lazy' ).setup(plugins,
+{
+    ui =
+    {
+        icons = {},
+    },
 })
 
 -- After lazy completes, notify of errors if any --
