@@ -64,6 +64,7 @@ local include =
     'zaldih/themery.nvim',
     'numToStr/Comment.nvim',
     'nvim-tree/nvim-tree.lua',
+    'Isrothy/neominimap.nvim',
 
     --TODO: Enable these one by one
     -- 'rmagatti/alternate-toggler',
@@ -73,7 +74,6 @@ local include =
     -- 'tpope/vim-surround',
     -- 'nvim-lualine/lualine.nvim',
     -- 'norcalli/nvim-colorizer.lua',
-    -- 'Isrothy/neominimap.nvim',
     -- 'akinsho/toggleterm.nvim',
     -- 'windwp/nvim-ts-autotag',
     -- 'j-hui/fidget.nvim',
