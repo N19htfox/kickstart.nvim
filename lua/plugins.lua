@@ -65,20 +65,18 @@ local include =
     'numToStr/Comment.nvim',
     'nvim-tree/nvim-tree.lua',
     'Isrothy/neominimap.nvim',
+    'j-hui/fidget.nvim',
+    'tpope/vim-surround',
+    'akinsho/toggleterm.nvim',
+    'rmagatti/alternate-toggler',
+    'windwp/nvim-autopairs',
+    'mg979/vim-visual-multi',
+    'gcmt/wildfire.vim',
+    'norcalli/nvim-colorizer.lua',
+    'AndrewRadev/sideways.vim',
+    'rktjmp/lush.nvim',
 
-    --TODO: Enable these one by one
-    -- 'rmagatti/alternate-toggler',
-    -- 'windwp/nvim-autopairs',
-    -- 'mg979/vim-visual-multi',
-    -- 'gcmt/wildfire.vim',
-    -- 'tpope/vim-surround',
-    -- 'nvim-lualine/lualine.nvim',
-    -- 'norcalli/nvim-colorizer.lua',
-    -- 'akinsho/toggleterm.nvim',
-    -- 'windwp/nvim-ts-autotag',
-    -- 'j-hui/fidget.nvim',
-    -- 'AndrewRadev/sideways.vim'
-    -- 'rktjmp/lush.nvim'
+    'nvim-lualine/lualine.nvim',
 }
 
 -- Define logfile for any errors that may occur when installing plugins --

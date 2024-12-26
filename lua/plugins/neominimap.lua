@@ -12,9 +12,9 @@ return
 {
     version = "v3.*.*",
     enabled = true,
-    lazy = false, -- NOTE: NO NEED to Lazy load
-    -- Optional
-    keys = {
+    lazy = false,
+    keys =
+    {
         -- Global Minimap Controls
         { "<leader>nm", "<cmd>Neominimap toggle<cr>", desc = "Toggle global minimap" },
         { "<leader>no", "<cmd>Neominimap on<cr>", desc = "Enable global minimap" },
@@ -94,10 +94,10 @@ return
             end,
 
             -- How many columns a dot should span
-            x_multiplier = 4, ---@type integer
+            x_multiplier = 4,
 
             -- How many rows a dot should span
-            y_multiplier = 1, ---@type integer
+            y_multiplier = 1,
 
             -- Either `split` or `float`
             -- When layout is set to `float`,
