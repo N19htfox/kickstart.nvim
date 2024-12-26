@@ -63,9 +63,9 @@ local include =
     'echasnovski/mini.nvim',
     'zaldih/themery.nvim',
     'numToStr/Comment.nvim',
+    'nvim-tree/nvim-tree.lua',
 
     --TODO: Enable these one by one
-    -- 'nvim-tree/nvim-tree.lua',
     -- 'rmagatti/alternate-toggler',
     -- 'windwp/nvim-autopairs',
     -- 'mg979/vim-visual-multi',

@@ -11,6 +11,9 @@
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = false
 
+-- Enable 24-bit color
+vim.opt.termguicolors = true
+
 -- Make line numbers default
 vim.opt.number = true
 
@@ -80,3 +83,7 @@ vim.opt.scrolloff = 10
 
 -- prevent extends and precedes from permanently hiding text
 vim.opt.sidescrolloff = 5
+
+-- Disable netrw in favor of nvim-tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
