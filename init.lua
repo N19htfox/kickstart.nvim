@@ -20,3 +20,6 @@ require( 'scripts' )
 
 -- Load Plugins --
 require( 'plugins' )
+
+-- Load Colors --
+require( 'colors' )

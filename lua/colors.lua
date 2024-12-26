@@ -1,0 +1,12 @@
+--=============================================================================.
+--== colors.lua
+--== -------------------------------------------------------------------------
+--== Module containing colorscheme definition for this neovim environment.
+--==
+--==  Project: Neovim Configuration
+--==   Author: Wesley DeMarco
+--==     Date: 2024-12-24
+--== Revision: 0
+--==...........................................................................=
+-- Theme managed by Themery
+--vim.cmd [[ colorscheme habamax ]]

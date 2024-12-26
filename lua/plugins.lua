@@ -58,8 +58,27 @@ local include =
     'neovim/nvim-lspconfig',
     'hrsh7th/nvim-cmp',
     'folke/todo-comments.nvim',
+    'L3MON4D3/LuaSnip',
     'nvim-treesitter/nvim-treesitter',
     'echasnovski/mini.nvim',
+    'zaldih/themery.nvim',
+    'numToStr/Comment.nvim',
+
+    --TODO: Enable these one by one
+    -- 'nvim-tree/nvim-tree.lua',
+    -- 'rmagatti/alternate-toggler',
+    -- 'windwp/nvim-autopairs',
+    -- 'mg979/vim-visual-multi',
+    -- 'gcmt/wildfire.vim',
+    -- 'tpope/vim-surround',
+    -- 'nvim-lualine/lualine.nvim',
+    -- 'norcalli/nvim-colorizer.lua',
+    -- 'Isrothy/neominimap.nvim',
+    -- 'akinsho/toggleterm.nvim',
+    -- 'windwp/nvim-ts-autotag',
+    -- 'j-hui/fidget.nvim',
+    -- 'AndrewRadev/sideways.vim'
+    -- 'rktjmp/lush.nvim'
 }
 
 -- Define logfile for any errors that may occur when installing plugins --
