@@ -42,7 +42,6 @@ if not ( vim.uv or vim.loop ).fs_stat( lazypath ) then
 end
 
 -- Give vim the path to the package manager --
----@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend( lazypath )
 
 --=============================================================================.
@@ -61,6 +60,7 @@ local include =
     'L3MON4D3/LuaSnip',
     'nvim-treesitter/nvim-treesitter',
     'echasnovski/mini.nvim',
+    'echasnovski/mini.ai',
     'zaldih/themery.nvim',
     'numToStr/Comment.nvim',
     'nvim-tree/nvim-tree.lua',
@@ -75,7 +75,6 @@ local include =
     'norcalli/nvim-colorizer.lua',
     'AndrewRadev/sideways.vim',
     'rktjmp/lush.nvim',
-
     'nvim-lualine/lualine.nvim',
 }
 
@@ -129,8 +128,10 @@ end
 local function srequire( module )
     -- Get config module path --
     local config = 'plugins.' .. module:match( '.*/(.*)' )
-                                       :gsub( '%.(.*)$', '' )
+                                       :gsub( '%.(n?vim)$', '' )
+                                       :gsub( '%.(lua)$', '' )
                                        :gsub( '%.', '_' )
+
     -- Call require on this config catching any error message --
     local success, result = pcall( require, config )
 
