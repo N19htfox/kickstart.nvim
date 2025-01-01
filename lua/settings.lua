@@ -89,8 +89,10 @@ vim.opt.listchars =
 {
     tab      = "⇥ ",
     eol      = "↲",
-    precedes = "❰",
-    extends  = "❱",
+    precedes = "❮",
+    extends  = "❯",
+    --precedes = "❬",
+    --extends  = "❭",
     trail    = "·",
     space    = "·",
     nbsp     = "·",
