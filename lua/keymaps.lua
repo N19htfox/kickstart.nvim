@@ -9,7 +9,6 @@
 --== Revision: 1
 --==...........................................................................=
 -- Set <space> as the leader key
--- See `:help mapleader`
---  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
+-- NOTE: Must happen before plugins are loaded
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "

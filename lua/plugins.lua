@@ -14,7 +14,6 @@
 --=============================================================================.
 --==                     Install LazyVim Package Manager
 --==...........................................................................=
--- See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 -- Establish the path where LazyVim should reside --
 local lazypath = vim.fn.stdpath( 'data' ) .. '/lazy/lazy.nvim'
 
