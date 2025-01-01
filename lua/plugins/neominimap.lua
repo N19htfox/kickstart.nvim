@@ -64,6 +64,7 @@ return
             -- Minimap will not be created for buffers of these types
             exclude_filetypes =
             {
+                "",
                 "help",
                 "bigfile",
             },
