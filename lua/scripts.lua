@@ -10,3 +10,6 @@
 --==...........................................................................=
 -- Script to briefly flash highlight on yanked text --
 require( 'scripts.flashyank' )
+
+-- Script to clear highlight search automatically when you're done with it --
+require( 'scripts.clear_hlsearch' )

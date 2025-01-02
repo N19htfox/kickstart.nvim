@@ -58,7 +58,7 @@ vim.opt.smartcase  = true
 
 -- Swap files --
 vim.opt.swapfile = true     -- Use swap files
-vim.opt.autoread = true     -- Automatically update buffers when changed on disk
+vim.opt.autoread = false    -- Don't automatically update buffers when changed on disk
 
 -- Save undo history
 vim.opt.undofile = true
